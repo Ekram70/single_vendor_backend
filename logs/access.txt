@@ -1,0 +1,8 @@
+[Thu, 19 Jan 2023 15:16:30 GMT] 	 ::ffff:127.0.0.1 	 GET 	 / 	 HTTP/1.1 	 200 	 -
+[Thu, 19 Jan 2023 15:16:40 GMT] 	 ::ffff:127.0.0.1 	 GET 	 / 	 HTTP/1.1 	 200 	 -
+[Thu, 19 Jan 2023 16:27:08 GMT] 	 ::ffff:127.0.0.1 	 GET 	 / 	 HTTP/1.1 	 200 	 -
+[Thu, 19 Jan 2023 16:27:42 GMT] 	 ::ffff:127.0.0.1 	 GET 	 /notfound 	 HTTP/1.1 	 404 	 -
+[Thu, 19 Jan 2023 17:48:10 GMT] 	 ::ffff:127.0.0.1 	 POST 	 /api/v1/user/register 	 HTTP/1.1 	 200 	 -
+[Thu, 19 Jan 2023 17:50:17 GMT] 	 ::ffff:127.0.0.1 	 POST 	 /api/v1/user/register 	 HTTP/1.1 	 200 	 -
+[Thu, 19 Jan 2023 17:50:59 GMT] 	 ::ffff:127.0.0.1 	 POST 	 /api/v1/user/register 	 HTTP/1.1 	 200 	 -
+[Thu, 19 Jan 2023 17:51:46 GMT] 	 ::ffff:127.0.0.1 	 POST 	 /api/v1/user/register 	 HTTP/1.1 	 200 	 -
