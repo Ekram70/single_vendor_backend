@@ -9,7 +9,7 @@ logger.token('message', (req) => req.error.name);
 const logAccessToFile = logger(
     '[:date[web]] \t :remote-addr \t :method \t :url \t HTTP/:http-version \t :status \t :origin',
     {
-        stream: fs.createWriteStream(path.join(__dirname, '..', 'logs', 'access.txt'), {
+        stream: fs.createWriteStream(path.join(__dirname, '..', '..', 'logs', 'access.txt'), {
             flags: 'a'
         })
     }
@@ -18,7 +18,7 @@ const logAccessToFile = logger(
 const logToConsole = logger('[:date[iso]] - :method - :url - :status - :origin');
 
 const logErrorToFile = logger('[:date[web]] \t :error \t :message', {
-    stream: fs.createWriteStream(path.join(__dirname, '..', 'logs', 'error.txt'), {
+    stream: fs.createWriteStream(path.join(__dirname, '..', '..', 'logs', 'error.txt'), {
         flags: 'a'
     })
 });

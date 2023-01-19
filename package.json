@@ -5,12 +5,20 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "ac": "autocannon http://localhost:8000",
+    "pm2start": "pm2 start index.js -i max",
+    "pm2stop": "pm2 stop index",
+    "pm2delete": "pm2 delete index",
+    "pm2reload": "pm2 reload index",
+    "pm2list": "pm2 list",
+    "pm2logs": "pm2 logs"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "autocannon": "^7.10.0",
     "eslint": "^8.32.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "^8.6.0",
@@ -25,6 +33,7 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "mongoose": "^6.8.4",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "pm2": "^5.2.2"
   }
 }
