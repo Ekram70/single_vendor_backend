@@ -1,12 +1,17 @@
 const express = require('express');
 require('dotenv').config();
 const cors = require('cors');
+const mongoose = require('mongoose');
 const { logAccessToFile, logToConsole } = require('./middlewares/logger');
 const errorHandler = require('./middlewares/ErrorHandler');
 const corsOptions = require('./config/corsOptions');
+const connectDB = require('./config/dbConnect');
 
 const app = express();
 const PORT = process.env.PORT || 3500;
+
+// Connect to MongoDB
+connectDB();
 app.use(logAccessToFile);
 app.use(logToConsole);
 
@@ -24,7 +29,9 @@ app.all('*', (_, res) => {
 });
 
 // error handling middleware
-
 app.use(errorHandler);
 
-app.listen(PORT, () => console.log(`Server is listening at port ${PORT}`));
+mongoose.connection.once('open', () => {
+    console.log('Connected to MongoDB');
+    app.listen(PORT, () => console.log(`Server is listening at port ${PORT}`));
+});
