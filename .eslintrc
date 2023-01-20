@@ -10,8 +10,11 @@
   "rules": {
     "import/no-cycle": 0,
     "comma-dangle": "off",
+    "consistent-return": "off",
     "no-console": 0,
     "indent": 0,
+    "no-useless-escape": "off",
+    "newline-per-chained-call": 0,
     "prettier/prettier": [
       "error",
       {

@@ -8,7 +8,7 @@ POST http://localhost:8000/api/v1/user/register
 Content-Type: application/json
 
 {
-    "fullname": "ekram ullah",
+    "name": "ekram ullah",
     "email": "ekramullah70@gmail.com",
-    "password": "Coc@104035"
+    "password": "aaa#a2Ux"
 }

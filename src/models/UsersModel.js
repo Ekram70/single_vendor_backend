@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 
 const DataSchema = mongoose.Schema(
     {
-        fullname: {
+        name: {
             type: String,
-            required: [true, 'full name is required'],
+            required: [true, 'name is required'],
             trim: true,
-            minLength: [5, 'full name must be at least 5 characters'],
+            minLength: [3, 'name must be at least 5 characters'],
             match: [/^[a-zA-Z\s]*$/g, 'only letters and spacess allowed']
         },
         email: {
@@ -14,17 +14,14 @@ const DataSchema = mongoose.Schema(
             required: [true, 'email is required'],
             unique: [true, 'this email is already assossiated with another account'],
             trim: true,
-            match: [
-                /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-                'not a valid email address'
-            ]
+            match: [/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, 'not a valid email address']
         },
         password: {
             type: String,
             required: [true, 'password is required'],
-            maxLength: [16, 'password can have maximum 16 characters'],
+            minLength: [8, 'password should be at least 8 characters'],
             match: [
-                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                /^(?=.*[A-Z])(?=.*[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$/,
                 'not a valid password'
             ]
         }
