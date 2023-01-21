@@ -8,7 +8,7 @@ const hpp = require('hpp');
 require('dotenv').config();
 
 const { logAccessToFile, logToConsole } = require('./src/middlewares/logger');
-const errorHandler = require('./src/middlewares/ErrorHandler');
+const errorHandler = require('./src/middlewares/errorHandler');
 const corsOptions = require('./config/corsOptions');
 const connectDB = require('./config/dbConnect');
 const limiter = require('./config/rateLimit');

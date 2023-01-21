@@ -24,6 +24,10 @@ const DataSchema = mongoose.Schema(
                 /^(?=.*[A-Z])(?=.*[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$/,
                 'not a valid password'
             ]
+        },
+        refreshToken: {
+            type: String,
+            default: ''
         }
     },
     {
@@ -32,6 +36,6 @@ const DataSchema = mongoose.Schema(
     }
 );
 
-const UsersModel = mongoose.model('users', DataSchema);
+const usersModel = mongoose.model('users', DataSchema);
 
-module.exports = UsersModel;
+module.exports = usersModel;

@@ -7,9 +7,10 @@
     "start": "node index.js",
     "dev": "nodemon index.js",
     "ac": "autocannon http://localhost:8000",
-    "pm2start": "pm2 start index.js --watch -i max",
+    "pm2start": "pm2 start index.js -i max",
     "pm2stop": "pm2 stop index",
     "pm2delete": "pm2 delete index",
+    "pm2watch": "pm2 start index.js --watch -i max",
     "pm2reload": "pm2 reload index",
     "pm2list": "pm2 list",
     "pm2logs": "pm2 logs"
@@ -29,6 +30,7 @@
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "date-fns": "^2.29.3",
     "dotenv": "^16.0.3",
