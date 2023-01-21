@@ -1,6 +1,6 @@
 const { body, header } = require('express-validator');
 
-const validationRegister = [
+const validateRegister = [
     header('content-type')
         .exists()
         .withMessage('must provide content-type')
@@ -48,5 +48,32 @@ const validationRegister = [
             'password must be 8 characters long and should contain one lowercase, one uppercase, one digits and one special characters'
         )
 ];
+const validateLogin = [
+    header('content-type')
+        .exists()
+        .withMessage('must provide content-type')
+        .equals('application/json')
+        .withMessage('invalid content-type'),
+    body('email')
+        .exists()
+        .withMessage('email is required')
+        .bail()
+        .isString()
+        .withMessage('email must be a string')
+        .bail()
+        .notEmpty()
+        .withMessage('email should not be empty')
+        .bail()
+        .trim(),
+    body('password')
+        .exists()
+        .withMessage('password is required')
+        .bail()
+        .isString()
+        .withMessage('passsword must be a string')
+        .bail()
+        .notEmpty()
+        .withMessage('password should not be empty')
+];
 
-module.exports = validationRegister;
+module.exports = { validateRegister, validateLogin };

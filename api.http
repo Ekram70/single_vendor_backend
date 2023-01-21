@@ -4,7 +4,7 @@ GET http://localhost:8000/
 GET http://localhost:8000/notfound
 
 ###
-POST http://localhost:8000/api/v1/user/register
+POST http://localhost:8000/api/v1/auth/register
 Content-Type: application/json
 
 {
@@ -14,10 +14,20 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:8000/api/v1/user/login
+GET http://localhost:8000/api/v1/auth/login
 Content-Type: application/json
 
 {
     "email": "ekramullah70@gmail.com",
     "password": "aaa#a2Ux"
 }
+
+###
+GET http://localhost:8000/api/v1/user/all
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZWtyYW0gdWxsYWgiLCJlbWFpbCI6ImVrcmFtdWxsYWg3MEBnbWFpbC5jb20iLCJpYXQiOjE2NzQzMjMyNzcsImV4cCI6MTY3NDMyNTA3N30.tX5IkIHcWcH9X3Y-prrfqYZljAxiPuzPpmk8rmWTsV4
+
+###
+GET http://localhost:8000/api/v1/refresh
+
+###
+GET http://localhost:8000/api/v1/logout
