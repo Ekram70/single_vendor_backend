@@ -26,15 +26,14 @@ const DataSchema = mongoose.Schema(
                 'not a valid password'
             ]
         },
-        refreshToken: {
-            type: String,
-            default: ''
-        },
+        refreshToken: String,
         roles: {
-            type: Object,
-            default: {
-                User: 5698
-            }
+            User: {
+                type: Number,
+                default: 5698
+            },
+            Editor: Number,
+            Admin: Number
         }
     },
     {

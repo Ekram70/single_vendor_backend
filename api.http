@@ -8,9 +8,9 @@ POST http://localhost:8000/api/v1/register
 Content-Type: application/json
 
 {
-    "name": "ekram ullah",
-    "email": "ekramullah70@gmail.com",
-    "password": "aaa#a2Ux"
+    "name": "ekram user",
+    "email": "ekramullah69@gmail.com",
+    "password": "Coc@104035"
 }
 
 ###
@@ -24,7 +24,7 @@ Content-Type: application/json
 
 ###
 GET http://localhost:8000/api/v1/user/all
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZWtyYW0gdWxsYWgiLCJlbWFpbCI6ImVrcmFtdWxsYWg3MEBnbWFpbC5jb20iLCJpYXQiOjE2NzQzMjMyNzcsImV4cCI6MTY3NDMyNTA3N30.tX5IkIHcWcH9X3Y-prrfqYZljAxiPuzPpmk8rmWTsV4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzY2Q2Y2ZiMjJhMjliNTE4NmI3OTkzMSIsIm5hbWUiOiJla3JhbSB1bGxhaCIsImVtYWlsIjoiZWtyYW11bGxhaDcwQGdtYWlsLmNvbSIsInJvbGVzIjpbNDc1OSwxNTY3LDU2OThdLCJpYXQiOjE2NzQ0MDgwOTYsImV4cCI6MTY3NDQwOTg5Nn0.9n0wouDL4xJ6WZkRx5dPHgJKFcwHn25QzrQHHroryJg
 
 ###
 GET http://localhost:8000/api/v1/refresh
@@ -50,5 +50,5 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzY2Q2NjljZ
 
 ###
 DELETE http://localhost:8000/api/v1/user
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzY2Q2NjljZDhkNmY3NzdlNjI2NzYyMiIsIm5hbWUiOiJla3JhbSB1bGxhaCIsImVtYWlsIjoiZWtyYW11bGxhaDcwQGdtYWlsLmNvbSIsInJvbGVzIjpbNTY5OF0sImlhdCI6MTY3NDQwNTgxOCwiZXhwIjoxNjc0NDA3NjE4fQ.DMqR3TJ5AQ9zy4WnZAU7DHUJ8wDXsjcBO9Qxk0BMk_s
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZWtyYW0gdWxsYWgiLCJlbWFpbCI6ImVrcmFtdWxsYWhAZ21haWwuY29tIiwicm9sZXMiOls1Njk4XSwiaWF0IjoxNjc0NDAyNzU3LCJleHAiOjE2NzQ0MDQ1NTd9.B4IMpcfOvDDD_jM2Et4513klFVbMpAjFytAt0TJ07nA
 

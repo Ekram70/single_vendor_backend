@@ -4,6 +4,13 @@ const getAllUser = async (req, res) => {
     try {
         const users = await usersModel.find();
 
+        if (!users) {
+            return res.status(204).json({
+                status: 'success',
+                data: 'No Users Found'
+            });
+        }
+
         res.status(200).json({ status: 'success', data: users });
     } catch (error) {
         res.status(500).json({ status: 'fail', data: error.message });
@@ -15,7 +22,7 @@ const getUser = async (req, res) => {
     try {
         const foundUser = await usersModel.findOne({ _id: id }).exec();
         if (!foundUser) {
-            res.status(400).json({ status: 'fail', data: `User ${name} not found` });
+            res.status(204).json({ status: 'fail', data: `User ${name} not found` });
         }
 
         res.status(200).json({ status: 'success', data: foundUser });
@@ -29,7 +36,7 @@ const updateUser = async (req, res) => {
     try {
         const foundUser = await usersModel.findOne({ _id: id }).exec();
         if (!foundUser) {
-            res.status(400).json({ status: 'fail', data: `User ${name} not found` });
+            res.status(204).json({ status: 'fail', data: `User ${name} not found` });
         }
 
         await usersModel.updateOne(
@@ -50,7 +57,7 @@ const deleteUser = async (req, res) => {
     try {
         const foundUser = await usersModel.findOne({ _id: id }).exec();
         if (!foundUser) {
-            res.status(400).json({ status: 'fail', data: `User ${name} not found` });
+            res.status(204).json({ status: 'success', data: `User ${name} not found` });
         }
         await usersModel.deleteOne({ _id: id });
         res.status(200).json({ status: 'success' });

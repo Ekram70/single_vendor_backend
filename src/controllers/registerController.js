@@ -40,7 +40,7 @@ const registration = async (req, res) => {
             secure: true,
             maxAge: 2 * 24 * 60 * 60 * 1000
         });
-        res.status(200).json({
+        res.status(201).json({
             status: 'success',
             accessToken,
             data: `New user ${newUser.name} created`

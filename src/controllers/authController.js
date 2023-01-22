@@ -20,6 +20,7 @@ const login = async (req, res) => {
                 email: foundUser.email,
                 roles
             };
+
             const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
                 expiresIn: '30m'
             });
