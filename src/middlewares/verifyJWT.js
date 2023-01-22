@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
 
 const verifyJWT = (req, res, next) => {
-    const authHeader = req.headers.authorization;
-    if (!authHeader) {
+    const authHeader = req.headers.authorization || req.headers.Authorization;
+    if (!authHeader?.startsWith('Bearer ')) {
         return res.sendStatus(401);
     }
 
@@ -11,8 +11,10 @@ const verifyJWT = (req, res, next) => {
         if (err) {
             return res.sendStatus(403);
         }
+        req.id = decoded.id;
         req.name = decoded.name;
         req.email = decoded.email;
+        req.roles = decoded.roles;
         next();
     });
 };

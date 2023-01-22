@@ -4,7 +4,7 @@ GET http://localhost:8000/
 GET http://localhost:8000/notfound
 
 ###
-POST http://localhost:8000/api/v1/auth/register
+POST http://localhost:8000/api/v1/register
 Content-Type: application/json
 
 {
@@ -14,7 +14,7 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:8000/api/v1/auth/login
+GET http://localhost:8000/api/v1/auth
 Content-Type: application/json
 
 {
@@ -31,3 +31,24 @@ GET http://localhost:8000/api/v1/refresh
 
 ###
 GET http://localhost:8000/api/v1/logout
+
+
+###
+GET http://localhost:8000/api/v1/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZWtyYW0gdWxsYWgiLCJlbWFpbCI6ImVrcmFtdWxsYWg3MEBnbWFpbC5jb20iLCJyb2xlcyI6WzU2OThdLCJpYXQiOjE2NzQ0MDA2OTIsImV4cCI6MTY3NDQwMjQ5Mn0.uTBYWfTTJDCv722AJzsso6JQOnizycaDPf9aclVFREo
+
+###
+PATCH http://localhost:8000/api/v1/user
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzY2Q2NjljZDhkNmY3NzdlNjI2NzYyMiIsIm5hbWUiOiJla3JhbSB1bGxhaCIsImVtYWlsIjoiZWtyYW11bGxhaDcwQGdtYWlsLmNvbSIsInJvbGVzIjpbNTY5OF0sImlhdCI6MTY3NDQwNTgxOCwiZXhwIjoxNjc0NDA3NjE4fQ.DMqR3TJ5AQ9zy4WnZAU7DHUJ8wDXsjcBO9Qxk0BMk_s
+
+{
+    "name": "Ekram Dewan",
+    "email": "ekramullah69@gmail.com",
+    "password": "Coc@104035"
+}
+
+###
+DELETE http://localhost:8000/api/v1/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzY2Q2NjljZDhkNmY3NzdlNjI2NzYyMiIsIm5hbWUiOiJla3JhbSB1bGxhaCIsImVtYWlsIjoiZWtyYW11bGxhaDcwQGdtYWlsLmNvbSIsInJvbGVzIjpbNTY5OF0sImlhdCI6MTY3NDQwNTgxOCwiZXhwIjoxNjc0NDA3NjE4fQ.DMqR3TJ5AQ9zy4WnZAU7DHUJ8wDXsjcBO9Qxk0BMk_s
+

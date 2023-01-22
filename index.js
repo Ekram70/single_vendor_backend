@@ -15,6 +15,7 @@ const corsOptions = require('./config/corsOptions');
 const connectDB = require('./config/dbConnect');
 const limiter = require('./config/rateLimit');
 const authRouter = require('./src/routes/authRoutes');
+const registerRouter = require('./src/routes/registerRoutes');
 const userRouter = require('./src/routes/userRoutes');
 const refreshRouter = require('./src/routes/refreshRoutes');
 const logoutRouter = require('./src/routes/logoutRoutes');
@@ -45,6 +46,7 @@ connectDB();
 
 // routing
 app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/register', registerRouter);
 app.use('/api/v1/user', userRouter);
 app.use('/api/v1/refresh', refreshRouter);
 app.use('/api/v1/logout', logoutRouter);

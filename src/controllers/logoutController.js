@@ -1,6 +1,6 @@
 const usersModel = require('../models/usersModel');
 
-const handleLogout = async (req, res) => {
+const logout = async (req, res) => {
     const { cookies } = req;
 
     if (!cookies?.jwt) {
@@ -21,7 +21,7 @@ const handleLogout = async (req, res) => {
         }
 
         await usersModel.updateOne(
-            { email: foundUser.email },
+            { _id: foundUser._id },
             {
                 $set: {
                     refreshToken: ''
@@ -40,5 +40,5 @@ const handleLogout = async (req, res) => {
     }
 };
 module.exports = {
-    handleLogout
+    logout
 };

@@ -20,9 +20,14 @@ const handleRefreshToken = async (req, res) => {
             if (err || foundUser.name !== decoded.name || foundUser.email !== decoded.email) {
                 res.sendStatus(403);
             }
+
+            const roles = Object.values(foundUser.roles);
+
             const payload = {
+                id: foundUser._id,
                 name: foundUser.name,
-                email: foundUser.email
+                email: foundUser.email,
+                roles
             };
             const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
                 expiresIn: '30m'

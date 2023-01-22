@@ -14,6 +14,7 @@ const DataSchema = mongoose.Schema(
             required: [true, 'email is required'],
             unique: [true, 'this email is already assossiated with another account'],
             trim: true,
+            lowerCase: true,
             match: [/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, 'not a valid email address']
         },
         password: {
@@ -28,6 +29,12 @@ const DataSchema = mongoose.Schema(
         refreshToken: {
             type: String,
             default: ''
+        },
+        roles: {
+            type: Object,
+            default: {
+                User: 5698
+            }
         }
     },
     {
