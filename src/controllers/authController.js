@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const usersModel = require('../models/usersModel');
 
 const login = async (req, res) => {
-    const { email, password } = req.body;
+    const { email, password, rememberMe } = req.body;
     try {
         const foundUser = await usersModel.findOne({ email }).exec();
 
@@ -20,13 +20,23 @@ const login = async (req, res) => {
                 email: foundUser.email,
                 roles
             };
-
-            const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
-                expiresIn: '30m'
-            });
-            const refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, {
-                expiresIn: '2d'
-            });
+            let accessToken = '';
+            let refreshToken = '';
+            if (rememberMe) {
+                accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
+                    expiresIn: '3h'
+                });
+                refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, {
+                    expiresIn: '7d'
+                });
+            } else {
+                accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
+                    expiresIn: '30m'
+                });
+                refreshToken = jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, {
+                    expiresIn: '2d'
+                });
+            }
             await usersModel.updateOne(
                 { _id: foundUser._id },
                 {
@@ -39,7 +49,7 @@ const login = async (req, res) => {
                 httpOnly: true,
                 sameSite: 'None',
                 secure: true,
-                maxAge: 2 * 24 * 60 * 60 * 1000
+                maxAge: rememberMe ? 7 * 24 * 60 * 60 * 1000 : 2 * 24 * 60 * 60 * 1000
             });
             res.status(200).json({
                 status: 'success',

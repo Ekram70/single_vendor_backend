@@ -1,11 +1,11 @@
 const { body, header } = require('express-validator');
 
 const validateLogin = [
-    header('content-type')
+    header('Content-Type')
         .exists()
-        .withMessage('must provide content-type')
+        .withMessage('must provide Content-Type')
         .equals('application/json')
-        .withMessage('invalid content-type'),
+        .withMessage('invalid Content-Type'),
     body('email')
         .exists()
         .withMessage('email is required')
@@ -26,6 +26,9 @@ const validateLogin = [
         .bail()
         .notEmpty()
         .withMessage('password should not be empty')
+        .bail()
+        .isLength({ min: 8, max: 24 })
+        .withMessage('passowrd must be between 8 to 24 characters')
 ];
 
 module.exports = { validateLogin };

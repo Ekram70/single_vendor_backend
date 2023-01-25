@@ -7,6 +7,7 @@ const DataSchema = mongoose.Schema(
             required: [true, 'name is required'],
             trim: true,
             minLength: [3, 'name must be at least 5 characters'],
+            maxLength: [24, 'name must be maximum 24 characters'],
             match: [/^[a-zA-Z\s]*$/g, 'only letters and spacess allowed']
         },
         email: {

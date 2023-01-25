@@ -1,11 +1,11 @@
 const { body, header } = require('express-validator');
 
 const validateRegister = [
-    header('content-type')
+    header('Content-Type')
         .exists()
-        .withMessage('must provide content-type')
+        .withMessage('must provide Content-Type')
         .equals('application/json')
-        .withMessage('invalid content-type'),
+        .withMessage('invalid Content-Type'),
     body('name')
         .exists()
         .withMessage('name is required')
@@ -17,8 +17,8 @@ const validateRegister = [
         .withMessage('name should not be empty')
         .bail()
         .trim()
-        .isLength({ min: 3 })
-        .withMessage('name must be at least 3 characters long'),
+        .isLength({ min: 8, max: 24 })
+        .withMessage('name must be between 8 to 24 characters'),
     body('email')
         .exists()
         .withMessage('email is required')
@@ -43,9 +43,12 @@ const validateRegister = [
         .notEmpty()
         .withMessage('password should not be empty')
         .bail()
+        .isLength({ min: 8, max: 24 })
+        .withMessage('passowrd must be between 8 to 24 characters')
+        .bail()
         .isStrongPassword()
         .withMessage(
-            'password must be 8 characters long and should contain one lowercase, one uppercase, one digits and one special characters'
+            'password should contain one lowercase, one uppercase, one digits and one special characters'
         )
 ];
 
