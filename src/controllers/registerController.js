@@ -43,7 +43,7 @@ const registration = async (req, res) => {
         res.status(201).json({
             status: 'success',
             accessToken,
-            data: `New user ${newUser.name} created`
+            roles: [5698]
         });
     } catch (error) {
         res.status(500).json({ status: 'fail', data: error.message });
