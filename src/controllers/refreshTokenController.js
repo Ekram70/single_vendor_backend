@@ -26,15 +26,15 @@ const handleRefreshToken = async (req, res) => {
             const payload = {
                 id: foundUser._id,
                 name: foundUser.name,
-                email: foundUser.email,
-                roles
+                email: foundUser.email
             };
             const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
                 expiresIn: '30m'
             });
             res.json({
                 status: 'success',
-                accessToken
+                accessToken,
+                roles
             });
         });
     } catch (error) {

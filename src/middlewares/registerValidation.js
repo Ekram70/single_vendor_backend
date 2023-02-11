@@ -17,8 +17,8 @@ const validateRegister = [
         .withMessage('name should not be empty')
         .bail()
         .trim()
-        .isLength({ min: 8, max: 24 })
-        .withMessage('name must be between 8 to 24 characters'),
+        .isLength({ min: 3, max: 24 })
+        .withMessage('name must be between 3 to 24 characters'),
     body('email')
         .exists()
         .withMessage('email is required')

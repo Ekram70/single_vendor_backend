@@ -1,4 +1,0 @@
-24/01/2023 	 23:58:12	Error: Not allowed by CORS
-24/01/2023 	 23:58:50	TypeError: res.headers is not a function
-24/01/2023 	 23:59:07	TypeError: res.headers is not a function
-24/01/2023 	 23:59:37	TypeError: res.headers is not a function
