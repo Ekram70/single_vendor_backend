@@ -17,7 +17,8 @@ const login = async (req, res) => {
             const payload = {
                 id: foundUser._id,
                 name: foundUser.name,
-                email: foundUser.email
+                email: foundUser.email,
+                roles
             };
             let accessToken = '';
             let refreshToken = '';
@@ -52,8 +53,7 @@ const login = async (req, res) => {
             });
             res.status(200).json({
                 status: 'success',
-                accessToken,
-                roles: Object.values(roles)
+                accessToken
             });
         } else {
             res.sendStatus(401);

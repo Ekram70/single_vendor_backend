@@ -20,14 +20,16 @@ const getAllUser = async (req, res) => {
 const getUser = async (req, res) => {
     const { name, id } = req;
     try {
-        const foundUser = await usersModel.findOne({ _id: id }).exec();
-        if (!foundUser) {
-            res.status(204).json({ status: 'fail', data: `User ${name} not found` });
-        }
+        const foundUser = await usersModel.findOne({ _id: id }).select({password: 0, refreshToken: 0, updatedAt: 0, roles: 0, _id: 0}).exec();
 
-        res.status(200).json({ status: 'success', data: foundUser });
+
+        if (!foundUser) {
+            res.status(204).json({ status: 'fail', userData: `User ${name} not found` });
+        } 
+
+        res.status(200).json({ status: 'success', userData: foundUser });
     } catch (error) {
-        res.status(500).json({ status: 'fail', data: error.message });
+        res.status(500).json({ status: 'fail', userData: error.message });
     }
 };
 
@@ -60,6 +62,11 @@ const deleteUser = async (req, res) => {
             res.status(204).json({ status: 'success', data: `User ${name} not found` });
         }
         await usersModel.deleteOne({ _id: id });
+        res.clearCookie('jwt', {
+            httpOnly: true,
+            sameSite: 'None',
+            secure: true
+        });
         res.status(200).json({ status: 'success' });
     } catch (error) {
         res.status(500).json({ status: 'fail', data: error.message });

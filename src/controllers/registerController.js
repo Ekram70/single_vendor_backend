@@ -18,7 +18,8 @@ const registration = async (req, res) => {
         const payload = {
             id: user._id,
             name: user.name,
-            email: user.email
+            email: user.email,
+            roles: [5698]
         };
         const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {
             expiresIn: '30m'
@@ -42,8 +43,7 @@ const registration = async (req, res) => {
         });
         res.status(201).json({
             status: 'success',
-            accessToken,
-            roles: [5698]
+            accessToken
         });
     } catch (error) {
         res.status(500).json({ status: 'fail', data: error.message });
