@@ -11,5 +11,5 @@
     "source.organizeImports": true
   },
   "eslint.alwaysShowStatus": true,
-  "dotenv.enableAutocloaking": true
+  "dotenv.enableAutocloaking": false
 }
