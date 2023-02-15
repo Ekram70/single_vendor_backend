@@ -104,17 +104,21 @@ app.post("/", upload.single("picture"), async (req, res) => {
 
   const ref = `${name}-${timestamp}`;
 
-  const data = await sharp(req.file.buffer).webp({ quality: 100 }).toBuffer();
+  try {
+    const data = await sharp(req.file.buffer).webp({ quality: 100 }).toBuffer();
 
-  const stream = cloudinary.uploader.upload_stream(
-    { folder: "uploads", public_id: ref },
-    (error, result) => {
-      if (error) return console.error(error);
-      return res.json({ URL: result.secure_url });
-    }
-  );
+    const stream = cloudinary.uploader.upload_stream(
+      { folder: "uploads", public_id: ref },
+      (error, result) => {
+        if (error) return console.error(error);
+        return res.json({ status: "success", URL: result.secure_url });
+      }
+    );
 
-  bufferToStream(data).pipe(stream);
+    bufferToStream(data).pipe(stream);
+  } catch (error) {
+    res.status(500).json({ status: "fail", data: error.message });
+  }
 });
 
 // routing
