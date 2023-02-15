@@ -1,4 +1,5 @@
 const express = require("express");
+const cloudinary = require("cloudinary").v2;
 const compression = require("compression");
 const cors = require("cors");
 const mongoose = require("mongoose");
@@ -8,7 +9,7 @@ const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
 const hpp = require("hpp");
 const cookieParser = require("cookie-parser");
-const fsPromises = require("fs").promises;
+const { Readable } = require("stream");
 const sharp = require("sharp");
 require("dotenv").config();
 
@@ -26,6 +27,7 @@ const logoutRouter = require("./src/routes/logoutRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 3500;
+
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
@@ -48,6 +50,13 @@ app.use(hpp());
 app.use(logAccessToFile);
 app.use(logToConsole);
 
+// Configuration
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
 // compress all responses
 app.use(compression());
 
@@ -57,25 +66,20 @@ app.use(express.static("./uploads"));
 // Connect to MongoDB
 connectDB();
 
+// buffer to stream
+const bufferToStream = (buffer) => {
+  const readable = new Readable({
+    read() {
+      this.push(buffer);
+      this.push(null);
+    },
+  });
+  return readable;
+};
+
 // testing
 app.post("/", upload.single("picture"), async (req, res) => {
-  try {
-    await fsPromises.access("./uploads");
-  } catch (error) {
-    try {
-      await fsPromises.mkdir("./uploads");
-    } catch (err) {
-      res.status(500).json({
-        status: "fail",
-        data: err,
-      });
-    }
-  }
-
-  const { buffer, originalname, mimetype } = req.file;
-  const timestamp = Date.now();
-
-  console.log(mimetype);
+  const { originalname, mimetype } = req.file;
 
   if (
     !(
@@ -84,7 +88,7 @@ app.post("/", upload.single("picture"), async (req, res) => {
       mimetype === "image/jpeg"
     )
   ) {
-    res.status(400).json({
+    return res.status(400).json({
       status: "fail",
       data: "'Only .png, .jpg and .jpeg format allowed!'",
     });
@@ -96,20 +100,21 @@ app.post("/", upload.single("picture"), async (req, res) => {
     .split(" ")
     .join("-");
 
-  const ref = `${name}-${timestamp}.webp`;
+  const timestamp = Date.now();
 
-  try {
-    await sharp(buffer).webp({ quality: 100 }).toFile(`./uploads/${ref}`);
-  } catch (error) {
-    res.status(500).json({
-      status: "fail",
-      data: error,
-    });
-  }
+  const ref = `${name}-${timestamp}`;
 
-  const link = `${process.env.ORIGIN}/${ref}`;
+  const data = await sharp(req.file.buffer).webp({ quality: 100 }).toBuffer();
 
-  res.status(200).json({ status: "success", link });
+  const stream = cloudinary.uploader.upload_stream(
+    { folder: "uploads", public_id: ref },
+    (error, result) => {
+      if (error) return console.error(error);
+      return res.json({ URL: result.secure_url });
+    }
+  );
+
+  bufferToStream(data).pipe(stream);
 });
 
 // routing
