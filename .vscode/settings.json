@@ -10,5 +10,6 @@
     "source.fixAll.tslint": true,
     "source.organizeImports": true
   },
-  "eslint.alwaysShowStatus": true
+  "eslint.alwaysShowStatus": true,
+  "dotenv.enableAutocloaking": true
 }

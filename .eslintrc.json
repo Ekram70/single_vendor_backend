@@ -4,13 +4,17 @@
     "commonjs": true,
     "es2021": true
   },
-  "extends": ["airbnb-base", "prettier", "node"],
-  "plugins": ["airbnb-base", "prettier", "import", "node"],
+  "extends": ["airbnb-base", "plugin:prettier/recommended"],
+  "plugins": ["node", "prettier"],
   "overrides": [],
   "parserOptions": {
     "ecmaVersion": "latest"
   },
   "rules": {
+    "no-console": "off",
+    "consistent-return": "off",
+    "no-underscore-dangle": "off",
+    "no-useless-escape": "off",
     "prettier/prettier": [
       "error",
       {
