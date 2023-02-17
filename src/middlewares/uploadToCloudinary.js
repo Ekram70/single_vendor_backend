@@ -4,7 +4,9 @@ const bufferToStream = require("../lib/bufferToStream");
 const renameFile = require("../lib/renameFile");
 
 const uploadSingleImageToCloudinary = (dir) => {
-  return async (req, res) => {
+  return async (req, res, next) => {
+    if (!req.file) next();
+
     const { originalname, mimetype } = req.file;
 
     if (
@@ -30,9 +32,12 @@ const uploadSingleImageToCloudinary = (dir) => {
       const stream = cloudinary.uploader.upload_stream(
         { folder: dir, public_id: fileName },
         (error, result) => {
-          if (error) return console.error(error);
-          console.log(req.headers);
-          return res.json({ status: "success", URL: result.secure_url });
+          if (error) {
+            res.status(500).json({ status: "fail", data: error.message });
+          }
+
+          req.body.avatar = result.secure_url;
+          next();
         }
       );
 

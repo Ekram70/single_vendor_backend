@@ -1,11 +1,16 @@
 const { body, header } = require("express-validator");
 
 const validateUpdateUser = [
-  header("content-type")
-    .exists()
-    .withMessage("must provide content-type")
-    .equals("application/json")
-    .withMessage("invalid content-type"),
+  header("content-type").exists().withMessage("must provide content-type"),
+  body("avatar")
+    .optional()
+    .isString()
+    .withMessage("avatar must be string")
+    .bail()
+    .notEmpty()
+    .withMessage("avatar should not be empty")
+    .bail()
+    .trim(),
   body("name")
     .optional()
     .isString()
@@ -29,6 +34,32 @@ const validateUpdateUser = [
     .isEmail()
     .withMessage("email should be a valid email")
     .normalizeEmail(),
+  body("phone")
+    .optional()
+    .isString()
+    .withMessage("phone must be string")
+    .bail()
+    .notEmpty()
+    .withMessage("phone should not be empty")
+    .trim(),
+  body("address")
+    .optional()
+    .isString()
+    .withMessage("address must be string")
+    .bail()
+    .notEmpty()
+    .withMessage("address should not be empty")
+    .trim(),
+  body("gender")
+    .optional()
+    .isString()
+    .withMessage("gender must be string")
+    .bail()
+    .notEmpty()
+    .withMessage("gender should not be empty")
+    .trim()
+    .equals("male" || "female")
+    .withMessage("Gender is either male or female"),
   body("password")
     .optional()
     .isString()

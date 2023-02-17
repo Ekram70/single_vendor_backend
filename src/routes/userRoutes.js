@@ -11,6 +11,10 @@ const {
 const { validateUpdateUser } = require("../middlewares/userValidation");
 const ROLES_LIST = require("../../config/roles_list");
 const verifyRoles = require("../middlewares/verifyRoles");
+const shouldFileUpload = require("../middlewares/shouldFileUpload");
+const {
+  uploadSingleImageToCloudinary,
+} = require("../middlewares/uploadToCloudinary");
 
 router
   .route("/")
@@ -22,6 +26,8 @@ router
   .patch(
     verifyJWT,
     verifyRoles([ROLES_LIST.Admin, ROLES_LIST.Editor, ROLES_LIST.User]),
+    shouldFileUpload("avatar"),
+    uploadSingleImageToCloudinary("shoppers/user"),
     validateUpdateUser,
     updateUser
   )

@@ -22,7 +22,14 @@ const getUser = async (req, res) => {
   try {
     const foundUser = await usersModel
       .findOne({ _id: id })
-      .select({ password: 0, refreshToken: 0, updatedAt: 0, roles: 0, _id: 0 })
+      .select({
+        password: 0,
+        refreshToken: 0,
+        updatedAt: 0,
+        createdAt: 0,
+        roles: 0,
+        _id: 0,
+      })
       .exec();
 
     if (!foundUser) {
@@ -39,6 +46,7 @@ const getUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
   const { id, name, body } = req;
+  console.log(body);
   try {
     const foundUser = await usersModel.findOne({ _id: id }).exec();
     if (!foundUser) {

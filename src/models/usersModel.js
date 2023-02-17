@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const DataSchema = mongoose.Schema(
   {
+    avatar: { type: String, default: "" },
     name: {
       type: String,
       required: [true, "name is required"],
@@ -21,6 +22,29 @@ const DataSchema = mongoose.Schema(
         "not a valid email address",
       ],
     },
+    phone: {
+      type: String,
+      unique: [
+        true,
+        "this phone number is already assossiated with another account",
+      ],
+      trim: true,
+      match: [/^(?:(?:\+|00)88|01)?\d{11}\r?$/, "not a valid phone number"],
+      default: "",
+    },
+    address: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+    gender: {
+      type: String,
+      enum: {
+        values: ["male", "female"],
+        message: "gender is either male or female",
+      },
+      default: "",
+    },
     password: {
       type: String,
       required: [true, "password is required"],
@@ -36,8 +60,14 @@ const DataSchema = mongoose.Schema(
         type: Number,
         default: 5698,
       },
-      Editor: Number,
-      Admin: Number,
+      Editor: {
+        type: Number,
+        default: 0,
+      },
+      Admin: {
+        type: Number,
+        default: 0,
+      },
     },
   },
   {
